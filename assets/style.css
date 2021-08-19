@@ -30,12 +30,12 @@ textarea {
  border-radius: 15px;
 }
 
-.row {
+/* .row {
  white-space: pre-wrap;
  height: 80px;
  border-top: 1px solid white;
  ;
-}
+} */
 
 .hour {
  background-color: #ffffff;
@@ -64,9 +64,42 @@ textarea {
  border-bottom-right-radius: 15px;
  background-color: #06AED5;
  color: white;
+ display: flex;
+ align-items: center;
+ justify-content: center;
 }
 
 .saveBtn i:hover {
  font-size: 20px;
  transition: all .3s ease-in-out;
+}
+
+.time {
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ background-color: lightblue;
+ border: solid black 1px;
+}
+
+.col-sm-10 {
+ padding-left: 0px;
+ padding-right: 0px;
+}
+
+.row {
+ margin-bottom: 1px;
+ margin-left: auto;
+ margin-right: auto;
+ height: 100px;
+}
+
+textarea.taskNote {
+ height: 100%;
+ word-wrap: break-word;
+}
+
+.container {
+ margin-top: 1%;
+ margin-bottom: 1%;
 }
