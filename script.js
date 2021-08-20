@@ -1,63 +1,75 @@
-// global variables
-// array (empty) for scheduledHours for time blocks
-let scheduledHours = []
 // assign variable for the current date from moment js (to be shown on currenDate element on html)
 let currentDate = moment().format('MMMM Do, YYYY, (h a)')
 console.log('today date: ' + currentDate);
-// assign variable for the present hour from moment js
+
+// assign variable for the present hour from moment js - this is passed as an integer
 let currentHour = moment().hour()
 console.log('current hour: ' + currentHour);
 
-// set hours for calendar start and end
-let hourStart = 8
-let hourEnd = 17
-
-// workday for local storage to store notes/tasks
-workDay = JSON.parse(localStorage.getItem('workDay')) || []
-
-// populate the currentDay element on html with the current date
+// populate the currentDay element on html jumbotron display with the current date
 $('#currentDay').html(currentDate)
-// document.getElementById('currentDay').textContent = currentDate
 
-// create text areas (text blocks for each hour) for the planner. Start at 8 (8am) and loop until 17 (5pm)
-for (let hourBlockInt = hourStart; hourBlockInt <= hourEnd; hourBlockInt++) {
+// for each time block row (row time-block) determine if the time block is the current hour, previous hour, or future hour
+$('.time-block').each(function () {
 
- console.log(hourBlockInt);
+  // set hourBlock equal to the data-time attribute (8 - 17) for each time-block row and log output for testing confirmation
+  let hourBlock = parseInt($(this).attr('data-time'));
+  console.log(`hourBlock parse: ${hourBlock}`);
 
- // format the hours from 8 to 17 into a time momemnt with hour and am/pm and push to an empty array
- scheduledHours.push(moment(hourBlockInt, 'ha').format('LT'));
+  // if the hourBlock (int) is equal to the currentHour (int) then remove the future/past classes and add present class (for color formatting - red)
+  if (hourBlock === currentHour) {
+    $(this).find('textarea').removeClass('future');
+    $(this).find('textarea').removeClass('past');
+    $(this).find('textarea').addClass('present');
+  }
+  // else if the hourBlock (int) is less than the currentHour (int) then remove the present/future classes and add past class (for color formatting - grey)
+  else if (hourBlock < currentHour) {
+    $(this).find('textarea').removeClass('future');
+    $(this).find('textarea').removeClass('present');
+    $(this).find('textarea').addClass('past');
+  }
+  // else if the hourBlock (int) is greater than the currentHour (int) then remove the preset/past classes and add future class (for color formatting - green)
+  else if (hourBlock > currentHour) {
+    $(this).find('textarea').removeClass('present');
+    $(this).find('textarea').removeClass('past');
+    $(this).find('textarea').addClass('future');
+  }
+})
 
- console.log(scheduledHours);
+// event listener when save button (on each time block row) is clicked - save items to local storage
+$('.saveBtn').on('click', function() {
+  event.preventDefault()
 
- // add/append to html body the time blocks (three columns total with time, text area, and save icon)
- $('#scheduleContainer').append(`
- <div class="row time-block" data-time="${hourBlockInt}">
-  <div class="col-sm-1 time" id="time${hourBlockInt}">${moment(hourBlockInt, 'ha').format('LT')}</div>
-  <div class="col-sm-10">
-    <textarea type="text" id="plan${hourBlockInt}" class="form-control taskNote"></textarea>
-  </div>
-  <div class="col-sm-1 saveBtn material-icons"><i class="far fa-save fa-2x save-icon"></i></div>
- </div>
- `);
-}
+  // variables for local storage to set the timeHour from the data-time attr in the parent element (i.e. 8 to create plan8) and grab the textarea value (user typed notes)
+  let timeHour = 'plan'+$(this).parent().attr('data-time')
+  let taskNoteText = $(this).parent().find('textarea').val();
 
-// function to convert the string text to integers for comparison later
-const stringInteger = (timeString) => {
- switch (timeString) {
-  // if key is this value then return value (integer to use for comparison)
-  case '8:00 AM': return 8
-  case '9:00 AM': return 9
-  case '10:00 AM': return 10
-  case '11:00 AM': return 11
-  case '12:00 PM': return 12
-  case '1:00 PM': return 13
-  case '2:00 PM': return 14
-  case '3:00 PM': return 15
-  case '4:00 PM': return 16
-  case '5:00 PM': return 17
- }
-}
+  // console logging for testing
+  // console.log(timeHour);
+  // console.log(taskNoteText);
+  
+  // set the items of timeHour and taskNoteText to local storage so it can be viewed (i.e. key=plan9 and value=user text)
+  localStorage.setItem(timeHour, taskNoteText)
+})
 
-// // log the function to test - should return 16. Testing
-console.log(stringInteger('4:00 PM'))
+// for each time block (row time-block)...
+$('.time-block').each(function() {
 
+  // assign idTime as the plan+data-time attribute (i.e. plan8) and get the item from local storage
+  let idTime = 'plan'+$(this).attr('data-time')
+  let schedule = localStorage.getItem(idTime);
+
+  // log for testing
+  // console.log(schedule);
+
+  // if the schdule is not null then find the textarea element in the time-block row and grab its value (user text content)
+  if (schedule !== null) {
+    $(this).find('textarea').val(schedule);
+  }
+})
+
+// for user to clear local storage and refresh the page
+$('.clearStorageBtn').on('click', function() {
+  localStorage.clear();
+  location.reload();
+})
