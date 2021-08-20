@@ -9,7 +9,7 @@ console.log('current hour: ' + currentHour);
 // populate the currentDay element on html jumbotron display with the current date
 $('#currentDay').html(currentDate)
 
-// for each time block row (row hour-block) determine if the time block is the current hour, previous hour, or future hour
+// for each hour time block row (row hour-block) determine if the time block is the current hour, previous hour, or future hour
 $('.hour-block').each(function () {
 
   // set hourBlock equal to the data-time attribute (8 - 17) for each hour-block row and log output for testing confirmation
@@ -40,7 +40,7 @@ $('.hour-block').each(function () {
 $('.saveBtn').on('click', function() {
   event.preventDefault()
 
-  // variables for local storage to set the timeHour from the data-time attr in the parent element (i.e. 8 to create plan8) and grab the textarea value (user typed notes)
+  // variables for local storage to set the timeHour from the data-time attr in the parent element (i.e. 8 to create plan8) and grab the textarea to set as value (user typed notes)
   let timeHour = 'plan'+$(this).parent().attr('data-time')
   let taskNoteText = $(this).parent().find('textarea').val();
 
@@ -48,23 +48,23 @@ $('.saveBtn').on('click', function() {
   // console.log(timeHour);
   // console.log(taskNoteText);
   
-  // set the items of timeHour and taskNoteText to local storage so it can be viewed (i.e. key=plan9 and value=user text)
+  // set the items of timeHour and taskNoteText to local storage so it can be viewed (i.e. key=plan8 and value=user text)
   localStorage.setItem(timeHour, taskNoteText)
 })
 
-// for each time block (row hour-block)...
+// for each hour time block (row hour-block)...
 $('.hour-block').each(function() {
 
-  // assign idTime as the plan+data-time attribute (i.e. plan8) and get the item from local storage
-  let idTime = 'plan'+$(this).attr('data-time')
-  let schedule = localStorage.getItem(idTime);
+  // timeHour for this time block (i.e. plan8) and get the item (task or note) from local storage that was set when saved
+  let timeHour = 'plan'+$(this).attr('data-time')
+  let taskNoteText = localStorage.getItem(timeHour);
 
   // log for testing
-  // console.log(schedule);
+  // console.log(taskNoteText);
 
-  // if the schdule is not null then find the textarea element in the hour-block row and grab its value (user text content)
-  if (schedule !== null) {
-    $(this).find('textarea').val(schedule);
+  // if the task note is not null then for this hour block then its task note text value (user text content)
+  if (taskNoteText !== null) {
+    $(this).find('textarea').val(taskNoteText);
   }
 })
 
