@@ -86,11 +86,17 @@ textarea {
  padding-right: 0px;
 }
 
-.row {
+.hour-block {
  margin-bottom: 1px;
  margin-left: auto;
  margin-right: auto;
  height: 100px;
+ border-radius: 15px;
+ text-align: center;
+ -webkit-border-radius: 15px;
+ -moz-border-radius: 15px;
+ -ms-border-radius: 15px;
+ -o-border-radius: 15px;
 }
 
 textarea.taskNote {
@@ -107,3 +113,9 @@ textarea.taskNote {
  background-color: darkblue;
  color: white;
 }
+
+/* .row {
+ white-space: pre-wrap;
+ height: 80px;
+ border-top: 1px solid white;
+ ;

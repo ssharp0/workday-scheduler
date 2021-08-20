@@ -9,10 +9,10 @@ console.log('current hour: ' + currentHour);
 // populate the currentDay element on html jumbotron display with the current date
 $('#currentDay').html(currentDate)
 
-// for each time block row (row time-block) determine if the time block is the current hour, previous hour, or future hour
-$('.time-block').each(function () {
+// for each time block row (row hour-block) determine if the time block is the current hour, previous hour, or future hour
+$('.hour-block').each(function () {
 
-  // set hourBlock equal to the data-time attribute (8 - 17) for each time-block row and log output for testing confirmation
+  // set hourBlock equal to the data-time attribute (8 - 17) for each hour-block row and log output for testing confirmation
   let hourBlock = parseInt($(this).attr('data-time'));
   console.log(`hourBlock parse: ${hourBlock}`);
 
@@ -52,8 +52,8 @@ $('.saveBtn').on('click', function() {
   localStorage.setItem(timeHour, taskNoteText)
 })
 
-// for each time block (row time-block)...
-$('.time-block').each(function() {
+// for each time block (row hour-block)...
+$('.hour-block').each(function() {
 
   // assign idTime as the plan+data-time attribute (i.e. plan8) and get the item from local storage
   let idTime = 'plan'+$(this).attr('data-time')
@@ -62,7 +62,7 @@ $('.time-block').each(function() {
   // log for testing
   // console.log(schedule);
 
-  // if the schdule is not null then find the textarea element in the time-block row and grab its value (user text content)
+  // if the schdule is not null then find the textarea element in the hour-block row and grab its value (user text content)
   if (schedule !== null) {
     $(this).find('textarea').val(schedule);
   }
