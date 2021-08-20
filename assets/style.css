@@ -25,10 +25,10 @@ textarea {
  white-space: pre-wrap;
 }
 
-.time-block {
+/* .time-block {
  text-align: center;
  border-radius: 15px;
-}
+} */
 
 /* .row {
  white-space: pre-wrap;
@@ -79,7 +79,6 @@ textarea {
  align-items: center;
  justify-content: center;
  background-color: lightblue;
- border: solid black 1px;
 }
 
 .col-sm-10 {
@@ -102,4 +101,9 @@ textarea.taskNote {
 .container {
  margin-top: 1%;
  margin-bottom: 1%;
+}
+
+.clearStorageBtn {
+ background-color: darkblue;
+ color: white;
 }
