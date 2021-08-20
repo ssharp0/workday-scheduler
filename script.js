@@ -1,5 +1,5 @@
 // assign variable for the current date from moment js (to be shown on currenDate element on html)
-let currentDate = moment().format('MMMM Do, YYYY, (h a)')
+let currentDate = moment().format('MMMM Do, YYYY - (h:m A)')
 console.log('today date: ' + currentDate);
 
 // assign variable for the present hour from moment js - this is passed as an integer
