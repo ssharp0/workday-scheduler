@@ -1,9 +1,11 @@
+/* styling for the body */
 body {
  font-family: 'Open Sans', sans-serif;
  font-size: 16px;
  line-height: 1;
 }
 
+/* styling for the text area for user input into each hour block */
 textarea {
  background: transparent;
  border: none;
@@ -13,6 +15,7 @@ textarea {
  padding: 10px;
 }
 
+/* jumbotron to display the current date and title info */
 .jumbotron {
  text-align: center;
  background-color: transparent;
@@ -21,43 +24,25 @@ textarea {
  border-bottom: 10px solid black;
 }
 
-.description {
- white-space: pre-wrap;
-}
-
-/* .time-block {
- text-align: center;
- border-radius: 15px;
-} */
-
-/* .row {
- white-space: pre-wrap;
- height: 80px;
- border-top: 1px solid white;
- ;
-} */
-
-.hour {
- background-color: #ffffff;
- color: #000000;
- border-top: 1px dashed #000000;
-}
-
+/* color styling if hour block is less than current hour */
 .past {
  background-color: #d3d3d3;
  color: white;
 }
 
+/* color formtting if hour block is equal to the current hour */
 .present {
  background-color: #ff6961;
  color: white;
 }
 
+/* color styling if hour block is greater than current hour */
 .future {
  background-color: #77dd77;
  color: white;
 }
 
+/* styling for the save button to save user text/tasks for each hour block */
 .saveBtn {
  border-left: 1px solid black;
  border-top-right-radius: 15px;
@@ -69,11 +54,13 @@ textarea {
  justify-content: center;
 }
 
+/* save button hover styling */
 .saveBtn i:hover {
  font-size: 20px;
  transition: all .3s ease-in-out;
 }
 
+/* styling for the time division (i.e. 8AM) */
 .time {
  display: flex;
  align-items: center;
@@ -81,12 +68,15 @@ textarea {
  background-color: lightblue;
 }
 
+/* styling for the col with the user text area */
 .col-sm-10 {
  padding-left: 0px;
  padding-right: 0px;
 }
 
+/* styling for the hour block (rows) */
 .hour-block {
+ border-top: 1px solid white;
  margin-bottom: 1px;
  margin-left: auto;
  margin-right: auto;
@@ -99,23 +89,20 @@ textarea {
  -o-border-radius: 15px;
 }
 
+/* styling for the text area */
 textarea.taskNote {
  height: 100%;
  word-wrap: break-word;
 }
 
+/* styling for the containers to give space*/
 .container {
  margin-top: 1%;
  margin-bottom: 1%;
 }
 
+/* styling for the clear storage button */
 .clearStorageBtn {
  background-color: darkblue;
  color: white;
 }
-
-/* .row {
- white-space: pre-wrap;
- height: 80px;
- border-top: 1px solid white;
- ;
